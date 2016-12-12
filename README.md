@@ -25,21 +25,16 @@ the "check" unit testing framework for C from https://libcheck.github.io/check/ 
 from the default package installer "apt" like so:
 apt install check
 
-You setup the build directories like so:
-mkdir obj
-mkdir bin
-
-You build the libBabySitterCalc.so shared ibrary like so:
-gcc -c -Wall -Werror -fPIC  -std=gnu99 ./src/lib/BabySitterCalc.c -o ./obj/BabySitterCalc.o
-gcc -shared -o ./bin/libBabySitterCalc.so ./obj/BabySitterCalc.o
-
-You build the TestBabySitter test app like so:
-gcc -L./bin -L/usr/lib/x86_64-linux-gnu/ -Wall -Werror -std=gnu99 ./src/tests/TestBabySitter.c -o ./bin/TestBabySitter -lBabySitterCalc -lcheck -pthread -lrt -lm
+You build the libBabySitterCalc.so shared library and TestBabySitter test app suite like so:
+make all
 
 You run the test app from the top directory like so:
 LD_LIBRARY_PATH=./bin ./bin/TestBabySitter
 
-You should see passed test output like so:
+You can also build everything and run the test app suite at the same time like so:
+make check
+
+If everything passes you should see test output like so:
 Running suite(s): BabySitter
 100%: Checks: 1, Failures: 0, Errors: 0
 
