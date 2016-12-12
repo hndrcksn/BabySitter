@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 // String functions
-bool isEarliestStartTime(void);
+bool isEarliestStartTime(const char *inTimeStr);
 
 #endif /* BABYSITTERCALC_H */
 

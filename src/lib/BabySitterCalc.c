@@ -1,7 +1,18 @@
 #include <stdlib.h>
+#include <string.h>
 #include "BabySitterCalc.h"
 
-bool isEarliestStartTime(void)
+// Shift time boundaries
+const char MINSTARTTIME[] = "5:00PM";
+
+bool isEarliestStartTime(const char *inTimeStr)
 {
-    return true;
+    if (strcmp(MINSTARTTIME, inTimeStr) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
