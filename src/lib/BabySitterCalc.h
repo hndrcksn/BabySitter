@@ -16,6 +16,7 @@ bool isInBounds(const char *inTimeStr);
 bool isValidTimeString(const char *inString);
 
 // Remuneration functions
+int getLowRateDues(int hours);
 int getMidRateDues(int hours);
 
 #endif /* BABYSITTERCALC_H */
