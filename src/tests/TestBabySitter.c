@@ -74,6 +74,9 @@ START_TEST (testBabySittingDues)
     /* High rate */
     ck_assert_int_eq(getDues(1, 16), 16);
     ck_assert_int_eq(getDues(-1, 16), 0);
+
+    /* Hours worked */
+    ck_assert_int_eq(getTotalHoursWorked("5:00PM", "6:00PM"), 1);
 }
 END_TEST
 

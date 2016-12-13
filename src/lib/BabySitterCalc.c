@@ -10,6 +10,7 @@ const char MINSTARTTIME[] = "5:00PM";
 const char MAXENDTIME[] = "4:00AM";
 const time_t MINSTARTTIME_T = 61200;
 const time_t MAXENDTIME_T = 100800;
+const time_t SECS_IN_HRS = 3600;
 
 // Remuneration rates
 const int LOW_RATE = 8;
@@ -137,5 +138,10 @@ int getDues(int hours, int rate)
     {
         return hours * rate;
     }
+}
+
+int getTotalHoursWorked(const char *startTime, const char *endTime)
+{
+    return (strToTime(endTime) - strToTime(startTime)) / SECS_IN_HRS;
 }
 
