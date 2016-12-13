@@ -153,3 +153,16 @@ int getTotalHoursWorked(const char *startTime, const char *endTime)
     }
 }
 
+int getTotalFundsDue(const char *startTime, const char *endTime, const char *bedTime)
+{
+    const char midNight[] = "12:00AM";
+    int midRateHours = (strToTime(bedTime) - strToTime(startTime)) / SECS_IN_HRS;
+    int lowRateHours = (strToTime(midNight) - strToTime(bedTime)) / SECS_IN_HRS;
+    int highRateHours = (strToTime(endTime) - strToTime(midNight)) / SECS_IN_HRS;
+    int totalFunds = getDues(lowRateHours, LOW_RATE) +
+                     getDues(midRateHours, MID_RATE) +
+                     getDues(highRateHours, HIGH_RATE);
+
+    return totalFunds;
+}
+

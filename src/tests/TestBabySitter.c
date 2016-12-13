@@ -81,6 +81,9 @@ START_TEST (testBabySittingDues)
     ck_assert_int_eq(getTotalHoursWorked("5:00PM", "12:00AM"), 7);
     ck_assert_int_eq(getTotalHoursWorked("5:00PM", "0:00AM"), 7);
     ck_assert_int_eq(getTotalHoursWorked("6:00PM", "5:00PM"), 0);
+
+    /* Money due */
+    ck_assert_int_eq(getTotalFundsDue("6:00PM", "1:00AM", "8:00PM"), 72);
 }
 END_TEST
 
