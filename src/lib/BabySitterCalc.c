@@ -59,6 +59,6 @@ time_t strToTime(const char *inString)
 
 char *timeToStr(time_t inTime, char *inBuffer, int inSize)
 {
-    strncpy(inBuffer, "4:00PM", inSize);
+    strftime(inBuffer, inSize, "%-I:%M%p", gmtime(&inTime));
     return inBuffer;
 }

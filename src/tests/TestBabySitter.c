@@ -22,6 +22,7 @@ START_TEST (testStringAndTimeConversions)
 
     char buffer[32];
     ck_assert_str_eq(timeToStr(57600, buffer, 32), "4:00PM");
+    ck_assert_str_eq(timeToStr(61200, buffer, 32), "5:00PM");
 }
 END_TEST
 
