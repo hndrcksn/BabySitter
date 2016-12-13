@@ -63,7 +63,27 @@ char *timeToStr(time_t inTime, char *inBuffer, int inSize)
     return inBuffer;
 }
 
+/*
+ * Validates a time string by converting it into a struct tm and then extracts an output
+ * time string. If the two strings are identical then the input string is valid.
+ */
 bool isValidTimeString(char *inString)
 {
-    return strcmp("5:00PM", inString) == 0;
+    char timeBuffer[32];
+    char date[12];
+    char outTime[8];
+
+    // Create time/date string from input string. Relative to start of Unix epoch
+    strncpy(date, "1970-01-01 ", sizeof(date));
+    sprintf(timeBuffer, "%s %s", date, inString);
+
+    // Initialize and set struct tm object to date and input time
+    struct tm start_epoch = {0};
+    strptime(timeBuffer, "%Y-%m-%d %-I:%M%p", &start_epoch);
+
+    // Retrieve time in expected format from struct tm object
+    strftime(outTime, sizeof(outTime), "%-I:%M%p", &start_epoch);
+
+    // Compare output string with input string. If it is different then input string wasn't valid
+    return strcmp(inString, outTime) == 0;
 }

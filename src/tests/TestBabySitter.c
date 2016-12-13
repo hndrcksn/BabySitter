@@ -39,6 +39,7 @@ END_TEST
 START_TEST (testValidTimeStringValue)
 {
     ck_assert(isValidTimeString("5:00PM"));
+    ck_assert(isValidTimeString("6:00PM"));
 }
 END_TEST
 
