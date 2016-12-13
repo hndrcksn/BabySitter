@@ -17,8 +17,8 @@ bool isValidTimeString(const char *inString);
 
 // Remuneration functions
 int getDues(int hours, int rate);
-int getTotalHoursWorked(const char *startTime, const char *endTime);
-int getTotalFundsDue(const char *startTime, const char *endTime, const char *bedTime);
+int getTotalHoursWorked(const char *startTimeStr, const char *endTimeStr);
+int getTotalFundsDue(const char *startTimeStr, const char *endTimeStr, const char *bedTimeStr);
 
 #endif /* BABYSITTERCALC_H */
 
