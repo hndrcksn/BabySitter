@@ -142,6 +142,14 @@ int getDues(int hours, int rate)
 
 int getTotalHoursWorked(const char *startTime, const char *endTime)
 {
-    return (strToTime(endTime) - strToTime(startTime)) / SECS_IN_HRS;
+    int difference = (strToTime(endTime) - strToTime(startTime)) / SECS_IN_HRS;
+    if (difference > 0)
+    {
+        return difference;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
