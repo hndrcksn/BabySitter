@@ -14,6 +14,7 @@ const time_t MAXENDTIME_T = 100800;
 // Remuneration rates
 const int LOW_RATE = 8;
 const int MID_RATE = 12;
+const int HIGH_RATE = 16;
 
 bool isEarliestStartTime(const char *inTimeStr)
 {
@@ -126,7 +127,7 @@ bool isValidTimeString(const char *inString)
 }
 
 // Remuneration functions
-int getLowRateDues(int hours)
+int getDues(int hours, int rate)
 {
     if (hours <= 0)
     {
@@ -134,19 +135,7 @@ int getLowRateDues(int hours)
     }
     else
     {
-        return hours * LOW_RATE;
-    }
-}
-
-int getMidRateDues(int hours)
-{
-    if (hours <= 0)
-    {
-        return 0;
-    }
-    else
-    {
-        return hours * MID_RATE;
+        return hours * rate;
     }
 }
 
