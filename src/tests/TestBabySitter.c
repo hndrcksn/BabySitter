@@ -5,12 +5,20 @@
 // Tests for conversions between strings and time values
 START_TEST (testStringAndTimeConversions)
 {
-    // time_t tm = 61200 secs = 01/01/1970 5:00pm
+    // Lower bounds time_t tm = 61200 secs = 01/01/1970 5:00pm
+    // Upper bounds time_t tm = 100800 secs = 02/01/1970 4:00am
+    ck_assert_int_eq(strToTime("4:00PM"), 57600);
     ck_assert_int_eq(strToTime("5:00PM"), 61200);
     ck_assert_int_eq(strToTime("6:00PM"), 64800);
     ck_assert_int_eq(strToTime("11:00PM"), 82800);
     ck_assert_int_eq(strToTime("11:59PM"), 86340);
     ck_assert_int_eq(strToTime("12:00AM"), 86400);
+    ck_assert_int_eq(strToTime("12:01AM"), 86460);
+    ck_assert_int_eq(strToTime("1:00AM"), 90000);
+    ck_assert_int_eq(strToTime("2:00AM"), 93600);
+    ck_assert_int_eq(strToTime("3:00AM"), 97200);
+    ck_assert_int_eq(strToTime("4:00AM"), 100800);
+    ck_assert_int_eq(strToTime("5:00AM"), 104400);
 }
 END_TEST
 
