@@ -127,6 +127,13 @@ bool isValidTimeString(const char *inString)
 // Remuneration functions
 int getMidRateDues(int hours)
 {
-    return hours * MID_RATE;
+    if (hours <= 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return hours * MID_RATE;
+    }
 }
 

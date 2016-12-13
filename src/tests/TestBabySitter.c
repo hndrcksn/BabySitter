@@ -64,6 +64,7 @@ END_TEST
 START_TEST (testBabySittingDues)
 {
     ck_assert_int_eq(getMidRateDues(1), 8);
+    ck_assert_int_eq(getMidRateDues(-1), 0);
 }
 END_TEST
 
