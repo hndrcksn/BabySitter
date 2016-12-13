@@ -155,6 +155,12 @@ int getTotalHoursWorked(const char *startTimeStr, const char *endTimeStr)
 
 int getTotalFundsDue(const char *startTimeStr, const char *endTimeStr, const char *bedTimeStr)
 {
+    if (!isInBounds(startTimeStr) ||
+        !isInBounds(endTimeStr) ||
+        !isInBounds(bedTimeStr))
+    {
+        return 0;
+    }
     const char midNightStr[] = "12:00AM";
     int startTime = strToTime(startTimeStr)/SECS_IN_HRS;
     int endTime = strToTime(endTimeStr)/SECS_IN_HRS;
