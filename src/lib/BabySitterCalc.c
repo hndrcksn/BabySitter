@@ -4,6 +4,7 @@
 
 // Shift time boundaries
 const char MINSTARTTIME[] = "5:00PM";
+const char MAXENDTIME[] = "4:00AM";
 
 bool isEarliestStartTime(const char *inTimeStr)
 {
@@ -16,3 +17,16 @@ bool isEarliestStartTime(const char *inTimeStr)
         return false;
     }
 }
+
+bool isLatestEndTime(const char *inTimeStr)
+{
+    if (strcmp(MAXENDTIME, inTimeStr) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+

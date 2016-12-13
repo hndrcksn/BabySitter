@@ -5,6 +5,10 @@
 START_TEST (testBabySittingTimes)
 {
     ck_assert(isEarliestStartTime("5:00PM"));
+    ck_assert(!isEarliestStartTime("5:01AM"));
+    ck_assert(isLatestEndTime("4:00AM"));
+    ck_assert(!isLatestEndTime("3:59AM"));
+    ck_assert(!isLatestEndTime("4:01AM"));
 }
 END_TEST
 

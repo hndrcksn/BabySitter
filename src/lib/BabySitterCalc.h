@@ -5,6 +5,7 @@
 
 // String functions
 bool isEarliestStartTime(const char *inTimeStr);
+bool isLatestEndTime(const char *inTimeStr);
 
 #endif /* BABYSITTERCALC_H */
 
