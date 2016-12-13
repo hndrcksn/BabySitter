@@ -86,6 +86,8 @@ START_TEST (testBabySittingDues)
     ck_assert_int_eq(getTotalFundsDue("6:00PM", "1:00AM", "8:00PM"), 72);
     ck_assert_int_eq(getTotalFundsDue("6:00PM", "2:00AM", "1:00AM"), 104);
     ck_assert_int_eq(getTotalFundsDue("1:00AM", "3:00AM", "11:00PM"), 32);
+    ck_assert_int_eq(getTotalFundsDue("1:00AM", "3:00AM", "1:00AM"), 32);
+    ck_assert_int_eq(getTotalFundsDue("6:00PM", "10:00PM", "11:00PM"), 48);
 }
 END_TEST
 
