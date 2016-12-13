@@ -2,6 +2,14 @@
 #include <check.h>
 #include "../lib/BabySitterCalc.h"
 
+// Tests for conversions between strings and time values
+START_TEST (testStringAndTimeConversions)
+{
+    // time_t tm = 61200 secs = 01/01/1970 5:00pm
+    ck_assert_int_eq(strToTime("5:00PM"), 61200);
+}
+END_TEST
+
 START_TEST (testBabySittingTimes)
 {
     ck_assert(isEarliestStartTime("5:00PM"));
@@ -20,6 +28,11 @@ Suite *babySitterTestSuite (void)
     TCase *tc_first = tcase_create ("First");
     tcase_add_test (tc_first, testBabySittingTimes);
     suite_add_tcase (s, tc_first);
+
+    /* String and time conversion case */
+    TCase *tc_string_time_conv = tcase_create("StringTimeConversion");
+    tcase_add_test (tc_string_time_conv, testStringAndTimeConversions);
+    suite_add_tcase (s, tc_string_time_conv);
 
     return s;
 }

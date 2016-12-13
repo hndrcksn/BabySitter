@@ -7,5 +7,8 @@
 bool isEarliestStartTime(const char *inTimeStr);
 bool isLatestEndTime(const char *inTimeStr);
 
+// String & time conversion functions
+time_t strToTime(const char *inString);
+
 #endif /* BABYSITTERCALC_H */
 
