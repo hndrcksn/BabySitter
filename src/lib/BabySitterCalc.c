@@ -10,7 +10,10 @@ const char MINSTARTTIME[] = "5:00PM";
 const char MAXENDTIME[] = "4:00AM";
 const time_t MINSTARTTIME_T = 61200;
 const time_t MAXENDTIME_T = 100800;
- 
+
+// Remuneration rates
+const int MID_RATE = 8;
+
 bool isEarliestStartTime(const char *inTimeStr)
 {
     if (strcmp(MINSTARTTIME, inTimeStr) == 0)
@@ -120,3 +123,10 @@ bool isValidTimeString(const char *inString)
         }
     }
 }
+
+// Remuneration functions
+int getMidRateDues(int hours)
+{
+    return hours * MID_RATE;
+}
+

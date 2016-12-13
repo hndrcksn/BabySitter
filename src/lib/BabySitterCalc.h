@@ -15,5 +15,8 @@ char *timeToStr(time_t inTime, char *inBuffer, int inSize);
 bool isInBounds(const char *inTimeStr);
 bool isValidTimeString(const char *inString);
 
+// Remuneration functions
+int getMidRateDues(int hours);
+
 #endif /* BABYSITTERCALC_H */
 

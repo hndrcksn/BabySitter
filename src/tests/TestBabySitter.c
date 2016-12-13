@@ -53,6 +53,17 @@ START_TEST (testBabySittingTimes)
     ck_assert(!isLatestEndTime("4:01AM"));
 
     ck_assert(isInBounds("5:00PM"));
+    ck_assert(!isInBounds("4:00PM"));
+    ck_assert(isInBounds("4:00AM"));
+    ck_assert(!isInBounds("5:00AM"));
+    ck_assert(isInBounds("00:00AM"));
+    ck_assert(isInBounds("12:00AM"));
+}
+END_TEST
+
+START_TEST (testBabySittingDues)
+{
+    ck_assert_int_eq(getMidRateDues(1), 8);
 }
 END_TEST
 
@@ -74,6 +85,11 @@ Suite *babySitterTestSuite (void)
     TCase *tc_string_time_conv = tcase_create("StringTimeConversion");
     tcase_add_test (tc_string_time_conv, testStringAndTimeConversions);
     suite_add_tcase (s, tc_string_time_conv);
+
+    /* Remuneration case */
+    TCase *tc_remuneration = tcase_create("Remuneration");
+    tcase_add_test (tc_remuneration, testBabySittingDues);
+    suite_add_tcase (s, tc_remuneration);
 
     return s;
 }
