@@ -8,7 +8,9 @@
 // Shift time boundaries
 const char MINSTARTTIME[] = "5:00PM";
 const char MAXENDTIME[] = "4:00AM";
-
+const time_t MINSTARTTIME_T = 61200;
+const time_t MAXENDTIME_T = 100800;
+ 
 bool isEarliestStartTime(const char *inTimeStr)
 {
     if (strcmp(MINSTARTTIME, inTimeStr) == 0)
@@ -63,11 +65,25 @@ char *timeToStr(time_t inTime, char *inBuffer, int inSize)
     return inBuffer;
 }
 
+bool isInBounds(const char *inTimeStr)
+{
+    time_t inTime = strToTime(inTimeStr);
+
+    if (inTime >= MINSTARTTIME_T && inTime <= MAXENDTIME_T)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 /*
  * Validates a time string by converting it into a struct tm and then extracts an output
  * time string. If the two strings are identical then the input string is valid.
  */
-bool isValidTimeString(char *inString)
+bool isValidTimeString(const char *inString)
 {
     char timeBuffer[32];
     char date[12];

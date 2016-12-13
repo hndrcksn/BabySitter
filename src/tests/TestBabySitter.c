@@ -51,6 +51,8 @@ START_TEST (testBabySittingTimes)
     ck_assert(isLatestEndTime("4:00AM"));
     ck_assert(!isLatestEndTime("3:59AM"));
     ck_assert(!isLatestEndTime("4:01AM"));
+
+    ck_assert(isInBounds("5:00PM"));
 }
 END_TEST
 

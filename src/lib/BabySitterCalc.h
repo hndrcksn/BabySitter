@@ -12,7 +12,8 @@ time_t strToTime(const char *inString);
 char *timeToStr(time_t inTime, char *inBuffer, int inSize);
 
 // Time string validation
-bool isValidTimeString(char *inString);
+bool isInBounds(const char *inTimeStr);
+bool isValidTimeString(const char *inString);
 
 #endif /* BABYSITTERCALC_H */
 
