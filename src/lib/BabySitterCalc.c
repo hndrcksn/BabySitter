@@ -165,7 +165,9 @@ int getTotalFundsDue(const char *startTimeStr, const char *endTimeStr, const cha
     int highRateHours = 0;
     int totalFunds = 0;
 
-    if (bedTime < midNight && startTime <= midNight && endTime >= bedTime && endTime >= midNight)
+    if (bedTime < midNight && startTime <= midNight &&
+        endTime >= bedTime && endTime >= midNight &&
+        !(bedTime <= startTime))
     {
         lowRateHours = midNight - bedTime;
         midRateHours = bedTime - startTime;
@@ -178,6 +180,11 @@ int getTotalFundsDue(const char *startTimeStr, const char *endTimeStr, const cha
     else if (endTime <= bedTime)
     {
         midRateHours = endTime - startTime;
+    }
+    else if (bedTime <= startTime)
+    {
+        lowRateHours = midNight - startTime;
+        highRateHours = endTime - midNight;
     }
     else
     {
