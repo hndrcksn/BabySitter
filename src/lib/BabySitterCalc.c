@@ -85,5 +85,22 @@ bool isValidTimeString(char *inString)
     strftime(outTime, sizeof(outTime), "%-I:%M%p", &start_epoch);
 
     // Compare output string with input string. If it is different then input string wasn't valid
-    return strcmp(inString, outTime) == 0;
+    if (strcmp(inString, outTime) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        // Retrieve time in alternate format from struct tm object
+        strftime(outTime, sizeof(outTime), "%I:%M%p", &start_epoch);
+
+        if (strcmp(inString, outTime) == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
