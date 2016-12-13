@@ -203,14 +203,31 @@ int getTotalFundsDue(const char *startTimeStr, const char *endTimeStr, const cha
     }
     else
     {
-        midRateHours = midNight - startTime;
-        highRateHours = endTime - midNight;
+        if (endTime <= midNight)
+        {
+            lowRateHours = endTime - bedTime;
+            midRateHours = bedTime - startTime;
+        }
+        else
+        {
+            midRateHours = midNight - startTime;
+            highRateHours = endTime - midNight;
+        }
     }
 
-    totalFunds = getDues(lowRateHours, LOW_RATE) +
-                 getDues(midRateHours, MID_RATE) +
-                 getDues(highRateHours, HIGH_RATE);
+    int totalHoursCollected = lowRateHours + midRateHours + highRateHours;
 
-    return totalFunds;
+    if (totalHoursCollected != getTotalHoursWorked(startTimeStr, endTimeStr))
+    {
+        return 0;
+    }
+    else
+    {
+        totalFunds = getDues(lowRateHours, LOW_RATE) +
+                     getDues(midRateHours, MID_RATE) +
+                     getDues(highRateHours, HIGH_RATE);
+
+        return totalFunds;
+    }
 }
 
