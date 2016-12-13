@@ -9,6 +9,7 @@ bool isLatestEndTime(const char *inTimeStr);
 
 // String & time conversion functions
 time_t strToTime(const char *inString);
+char *timeToStr(time_t inTime, char *inBuffer, int inSize);
 
 #endif /* BABYSITTERCALC_H */
 

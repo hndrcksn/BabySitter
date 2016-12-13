@@ -56,3 +56,9 @@ time_t strToTime(const char *inString)
 
     return rawTime;
 }
+
+char *timeToStr(time_t inTime, char *inBuffer, int inSize)
+{
+    strncpy(inBuffer, "4:00PM", inSize);
+    return inBuffer;
+}

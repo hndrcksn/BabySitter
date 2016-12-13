@@ -19,6 +19,9 @@ START_TEST (testStringAndTimeConversions)
     ck_assert_int_eq(strToTime("3:00AM"), 97200);
     ck_assert_int_eq(strToTime("4:00AM"), 100800);
     ck_assert_int_eq(strToTime("5:00AM"), 104400);
+
+    char buffer[32];
+    ck_assert_str_eq(timeToStr(57600, buffer, 32), "4:00PM");
 }
 END_TEST
 
