@@ -7,6 +7,10 @@ START_TEST (testStringAndTimeConversions)
 {
     // time_t tm = 61200 secs = 01/01/1970 5:00pm
     ck_assert_int_eq(strToTime("5:00PM"), 61200);
+    ck_assert_int_eq(strToTime("6:00PM"), 64800);
+    ck_assert_int_eq(strToTime("11:00PM"), 82800);
+    ck_assert_int_eq(strToTime("11:59PM"), 86340);
+    ck_assert_int_eq(strToTime("12:00AM"), 86400);
 }
 END_TEST
 
