@@ -23,6 +23,22 @@ START_TEST (testStringAndTimeConversions)
     char buffer[32];
     ck_assert_str_eq(timeToStr(57600, buffer, 32), "4:00PM");
     ck_assert_str_eq(timeToStr(61200, buffer, 32), "5:00PM");
+    ck_assert_str_eq(timeToStr(64800, buffer, 32), "6:00PM");
+    ck_assert_str_eq(timeToStr(82800, buffer, 32), "11:00PM");
+    ck_assert_str_eq(timeToStr(86340, buffer, 32), "11:59PM");
+    ck_assert_str_eq(timeToStr(86400, buffer, 32), "12:00AM");
+    ck_assert_str_eq(timeToStr(86460, buffer, 32), "12:01AM");
+    ck_assert_str_eq(timeToStr(90000, buffer, 32), "1:00AM");
+    ck_assert_str_eq(timeToStr(93600, buffer, 32), "2:00AM");
+    ck_assert_str_eq(timeToStr(97200, buffer, 32), "3:00AM");
+    ck_assert_str_eq(timeToStr(100800, buffer, 32), "4:00AM");
+    ck_assert_str_eq(timeToStr(104400, buffer, 32), "5:00AM");
+}
+END_TEST
+
+START_TEST (testValidTimeStringValue)
+{
+    ck_assert(isValidTimeString("5:00PM"));
 }
 END_TEST
 
@@ -40,10 +56,15 @@ Suite *babySitterTestSuite (void)
 {
     Suite *s = suite_create ("BabySitter");
 
-    /* First test case */
-    TCase *tc_first = tcase_create ("First");
-    tcase_add_test (tc_first, testBabySittingTimes);
-    suite_add_tcase (s, tc_first);
+    /* Time string validation */
+    TCase *tc_valid_time_string = tcase_create ("ValidTimeString");
+    tcase_add_test (tc_valid_time_string, testValidTimeStringValue);
+    suite_add_tcase (s, tc_valid_time_string);
+
+    /* Boundary test case */
+    TCase *tc_boundary = tcase_create ("Boundary");
+    tcase_add_test (tc_boundary, testBabySittingTimes);
+    suite_add_tcase (s, tc_boundary);
 
     /* String and time conversion case */
     TCase *tc_string_time_conv = tcase_create("StringTimeConversion");

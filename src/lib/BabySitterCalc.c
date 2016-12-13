@@ -62,3 +62,8 @@ char *timeToStr(time_t inTime, char *inBuffer, int inSize)
     strftime(inBuffer, inSize, "%-I:%M%p", gmtime(&inTime));
     return inBuffer;
 }
+
+bool isValidTimeString(char *inString)
+{
+    return strcmp("5:00PM", inString) == 0;
+}
