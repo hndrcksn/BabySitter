@@ -9,6 +9,7 @@
 typedef enum {E_GREET_INPUT_START = 0, E_INPUT_END, E_INPUT_BED, E_OUTPUT_EARNINGS_WAIT, E_GOODBYE } e_state_type;
 
 char *getInput(void);
+e_state_type handleInput(char *outStr, e_state_type currState);
 
 #endif /* BABYSITTERAPP_H */
 

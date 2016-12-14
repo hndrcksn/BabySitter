@@ -44,6 +44,45 @@ char *getInput(void)
     return linePtr;
 }
 
+e_state_type handleInput(char *outStr, e_state_type currState)
+{
+    char *newValue, *posn;
+    e_state_type newState = currState;
+
+    newValue = getInput();
+    if ((posn=strchr(newValue, '\n')) != NULL)
+    {
+        *posn = '\0';
+    }
+
+    if (strncmp(newValue, "q", strlen(newValue)) == 0)
+    {
+        newState = E_GOODBYE;
+    }
+    else if (strncmp(newValue, "r", strlen(newValue)) == 0)
+    {
+        newState = E_GREET_INPUT_START;
+    }
+    else if (outStr != NULL)
+    {
+        if (isValidTimeString(newValue) && isInBounds(newValue))
+        {
+            strncpy(outStr, newValue, strlen(newValue));
+            newState = currState + 1;
+        }
+        else if (!isValidTimeString(newValue))
+        {
+            printf("\nOOPS! %s is not a valid time string. Please try again\n", newValue);
+        }
+        else if (!isInBounds(newValue))
+        {
+            printf("\nOOPS! Input value (%s) must be between 5:00PM and 4:00AM. Please try again\n", newValue);
+        }
+    }
+
+    return newState;
+}
+
 const char greeting[] = "Welcome to the BabySitterApp. Type 'q' or ENTER on an empty line to exit or 'r' to reset to the beginning.\n"
                         "Enter the babysitting start time (between 5:00PM and 4:00AM) to begin...";
 
@@ -57,7 +96,6 @@ const char goodByeMsg[] = "BabySitterApp is now exiting...";
 
 int main(void)
 {
-    char *newValue, *posn;
     e_state_type myState = E_GREET_INPUT_START;
 
     char inStartTimeStr[32];
@@ -78,115 +116,24 @@ int main(void)
                 outEarnings = 0;
 
                 printf("%s\n", greeting);
-                newValue = getInput();
-                if ((posn=strchr(newValue, '\n')) != NULL)
-                {
-                    *posn = '\0';
-                }
-
-                if (strncmp(newValue, "q", strlen(newValue)) == 0)
-                {
-                    myState = E_GOODBYE;
-                }
-                else if (strncmp(newValue, "r", strlen(newValue)) == 0)
-                {
-                    myState = E_GREET_INPUT_START;
-                }
-                else if (isValidTimeString(newValue) && isInBounds(newValue))
-                {
-                    strncpy(inStartTimeStr, newValue, strlen(newValue));
-                    myState = E_INPUT_END;
-                }
-                else if (!isValidTimeString(newValue))
-                {
-                    printf("\nOOPS! %s is not a valid time string. Please try again\n", newValue);
-                }
-                else if (!isInBounds(newValue))
-                {
-                    printf("\nOOPS! Input value (%s) must be between 5:00PM and 4:00AM. Please try again\n", newValue);
-                }
+                myState = handleInput(inStartTimeStr, myState);
                 break;
 
             case E_INPUT_END:
                 printf("%s\n", inputEndMsg);
-                newValue = getInput();
-                if ((posn=strchr(newValue, '\n')) != NULL)
-                {
-                    *posn = '\0';
-                }
-
-                if (strncmp(newValue, "q", strlen(newValue)) == 0)
-                {
-                    myState = E_GOODBYE;
-                }
-                else if (strncmp(newValue, "r", strlen(newValue)) == 0)
-                {
-                    myState = E_GREET_INPUT_START;
-                }
-                else if (isValidTimeString(newValue) && isInBounds(newValue))
-                {
-                    strncpy(inEndTimeStr, newValue, strlen(newValue));
-                    myState = E_INPUT_BED;
-                }
-                else if (!isValidTimeString(newValue))
-                {
-                    printf("\nOOPS! %s is not a valid time string. Please try again\n", newValue);
-                }
-                else if (!isInBounds(newValue))
-                {
-                    printf("\nOOPS! Input value (%s) must be between 5:00PM and 4:00AM. Please try again\n", newValue);
-                }
+                myState = handleInput(inEndTimeStr, myState);
                 break;
 
             case E_INPUT_BED:
                 printf("%s\n", inputBedMsg);
-                newValue = getInput();
-                if ((posn=strchr(newValue, '\n')) != NULL)
-                {
-                    *posn = '\0';
-                }
-
-                if (strncmp(newValue, "q", strlen(newValue)) == 0)
-                {
-                    myState = E_GOODBYE;
-                }
-                else if (strncmp(newValue, "r", strlen(newValue)) == 0)
-                {
-                    myState = E_GREET_INPUT_START;
-                }
-                else if (isValidTimeString(newValue) && isInBounds(newValue))
-                {
-                    strncpy(inBedTimeStr, newValue, strlen(newValue));
-                    myState = E_OUTPUT_EARNINGS_WAIT;
-                }
-                else if (!isValidTimeString(newValue))
-                {
-                    printf("\nOOPS! %s is not a valid time string. Please try again\n", newValue);
-                }
-                else if (!isInBounds(newValue))
-                {
-                    printf("\nOOPS! Input value (%s) must be between 5:00PM and 4:00AM. Please try again\n", newValue);
-                }
+                myState = handleInput(inBedTimeStr, myState);
                 break;
 
             case E_OUTPUT_EARNINGS_WAIT:
                 printf("%s\n", outputEarningsMsg);
                 outEarnings = getTotalFundsDue(inStartTimeStr, inEndTimeStr, inBedTimeStr);
                 printf("$%d\n", outEarnings);
-                newValue = getInput();
-                if ((posn=strchr(newValue, '\n')) != NULL)
-                {
-                    *posn = '\0';
-                }
-
-                if (strncmp(newValue, "q", strlen(newValue)) == 0)
-                {
-                    myState = E_GOODBYE;
-                }
-                else if (strncmp(newValue, "r", strlen(newValue)) == 0)
-                {
-                    myState = E_GREET_INPUT_START;
-                }
+                myState = handleInput(NULL, myState);
                 break;
 
             case E_GOODBYE:
