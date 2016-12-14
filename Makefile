@@ -1,4 +1,4 @@
-.PHONY : all check
+.PHONY : clean dist-clean all directories check
 
 CC           = gcc
 MKDIR_P      = mkdir -p
@@ -31,6 +31,12 @@ LIBCHECK   = check
 
 all : directories $(BINDIR) $(LIBTARGET) $(TESTTARGET) $(APPTARGET)
 	echo "Building all..."
+
+clean : directories
+	rm -f $(OBJDIR)/* $(BINDIR)/*
+
+dist-clean :
+	rm -rf $(OBJDIR) $(BINDIR)
 
 directories : $(OBJDIR) $(BINDIR)
 

@@ -25,16 +25,25 @@ the "check" unit testing framework for C from https://libcheck.github.io/check/ 
 from the default package installer "apt" like so:
 apt install check
 
-You build the libBabySitterCalc.so shared library and TestBabySitter test app suite like so:
+You build the libBabySitterCalc.so shared library, TestBabySitter test app suite and BabySitterApp like so:
 make all
 
 You run the test app from the top directory like so:
 LD_LIBRARY_PATH=./bin ./bin/TestBabySitter
 
-You can also build everything and run the test app suite at the same time like so:
+You can also build the library, test app and run the test app suite at the same time like so:
 make check
 
 If everything passes you should see test output like so:
 Running suite(s): BabySitter
 100%: Checks: 1, Failures: 0, Errors: 0
+
+You run the BabySitterApp for inputting the start, end and bedtimes from the top directory like so:
+LD_LIBRARY_PATH=./bin ./bin/BabySitterApp
+
+The BabySitterApp will ask you to input the start, end and bedtimes in that order. You can type a 'r' to reset
+the app to start over from the beginning. To quit the app type 'q' or hit the return key on an empty line. The
+app expects time values between 5:00PM and 4:00AM and will prompt you to re-enter your value if it is invalid or
+out of bounds. After all three values are entered it will calculate your expected earnings after which you can
+exit or hit 'r' to enter new values.
 
